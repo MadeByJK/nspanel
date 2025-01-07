@@ -1,1 +1,1 @@
-Rules for tasmota to extend functionality of the nspanel
+Rules for tasmota to extend functionality of the nspanel with Home Assistant
