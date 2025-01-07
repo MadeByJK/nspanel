@@ -1,0 +1,14 @@
+1. Connect pn532 rx to pin 22, tx to pin 23 of nspanel
+1. In tasmota go to configuration > template, change pin 22 and 23 to user
+1. In module set GPIO 22 to PN532 Rx,  GPIO 23 to PN532 Tx
+1. Define ruleset:
+
+```
+Rule1
+  ON mqtt#connected DO Publish ha/tag/<nodeid>/<objectid>/config {"name":"Card reader","topic":"<topic>","value_template":"{{value_json.UID}}", "device":{ "identifiers":"card-reader", "name":"Screen Scanner", "suggested_area":"<area>"}}  ENDON
+  ON PN532#UID DO Publish <topic> {"UID":"%value%"} ENDON
+```
+
+
+first rule will publish ha autodiscovery message on mqtt connection
+second will publish event when card is scanned
